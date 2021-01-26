@@ -1,0 +1,21 @@
+<h3>Create an account</h3>
+<form class="ui form" [formGroup]="authForm">
+  <div class="field">
+    <label>Username</label>
+    <input formControlName="username"/>
+  </div>
+  <div class="field">
+    <label>Password</label>
+    <input formControlName="password"/>
+  </div>
+  <div class="field">
+    <label>Confirm Password</label>
+    <input formControlName="passwordConfirmation"/>
+  </div>
+  <button class="ui submit button primary">Submit</button>
+</form>
+<hr>
+<!-- DEBUG -->
+<div>Form values: {{ authForm.value |json }}</div>
+<div>Form is valid: {{authForm.valid}} </div>
+<!-- <div>Errors around name: {{authForm.controls.name.errors | json}}</div> -->
