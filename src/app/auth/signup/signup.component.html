@@ -4,18 +4,26 @@
     <label>Username</label>
     <input formControlName="username"/>
   </div>
+  {{ authForm.get("username").errors | json }}
   <div class="field">
     <label>Password</label>
     <input formControlName="password"/>
   </div>
+  {{ authForm.get("password").errors | json }}
+
   <div class="field">
     <label>Confirm Password</label>
     <input formControlName="passwordConfirmation"/>
   </div>
+  {{ authForm.get("passwordConfirmation").errors | json }}
+
   <button class="ui submit button primary">Submit</button>
+
+  {{ authForm.errors | json }}
+
 </form>
 <hr>
 <!-- DEBUG -->
 <div>Form values: {{ authForm.value |json }}</div>
 <div>Form is valid: {{authForm.valid}} </div>
-<!-- <div>Errors around name: {{authForm.controls.name.errors | json}}</div> -->
+<!-- <div>Errors around name: {{authForm.controls.errors | json}}</div> -->
