@@ -8,6 +8,7 @@ import { HttpClientModule } from "@angular/common/http"
 import { AppComponent } from './app.component';
 
 import {AuthModule} from "./auth/auth.module"
+import {AuthService} from "./auth/auth.service"
 import {MatchPassword} from "./auth/validators/match-password"
 import {UniqueUserName} from "./auth/validators/unique-user-name"
 
@@ -21,7 +22,7 @@ import {UniqueUserName} from "./auth/validators/unique-user-name"
     AppRoutingModule,
     AuthModule, HttpClientModule
   ],
-  providers: [MatchPassword, UniqueUserName],
+  providers: [MatchPassword, UniqueUserName, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
