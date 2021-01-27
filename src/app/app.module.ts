@@ -11,7 +11,7 @@ import {AuthModule} from "./auth/auth.module"
 import {AuthService} from "./auth/auth.service"
 import {MatchPassword} from "./auth/validators/match-password"
 import {UniqueUserName} from "./auth/validators/unique-user-name"
-
+import {AuthHttpInterceptor} from "./auth/auth-http-interceptor"
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import {UniqueUserName} from "./auth/validators/unique-user-name"
     AppRoutingModule,
     AuthModule, HttpClientModule
   ],
-  providers: [MatchPassword, UniqueUserName, AuthService],
+  providers: [MatchPassword, UniqueUserName, AuthService, AuthHttpInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
