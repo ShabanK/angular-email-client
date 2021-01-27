@@ -30,12 +30,22 @@ export class AuthService {
   signup(credentials: SignupCredentials){
     console.log("This was fired")
     return this.http.post<SignupResponse>(`${this.rootUrl}/auth/signup`,
-      credentials
+      credentials, {withCredentials:true}
     ).pipe(
       tap(()=>{
         this.signedIn$.next(true)
       })
     )
+  }
+
+  checkAuth(){
+    return this.http.get(`${this.rootUrl}/auth/signedin`, {withCredentials:true})
+      .pipe(
+        tap((response)=>{
+          console.log(response)
+        })
+      )
+    
   }
 
 }
