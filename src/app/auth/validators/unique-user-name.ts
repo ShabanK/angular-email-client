@@ -19,13 +19,10 @@ export class UniqueUserName implements AsyncValidator {
             map(()=>{
                 return null
             }),
-            catchError((err)=>{
-                console.log(err)
+            catchError((err: any) => {
                 if(err.error.username){
-                    return of({nonUniqueUsername:true})
-                } else {
-                    return of({offline: true})
-                }
+                    return of({nonUniqueUsername:true, offline:false})
+                } else return of({nonUniqueUsername:false,offline:true})
             })
         )
     }
