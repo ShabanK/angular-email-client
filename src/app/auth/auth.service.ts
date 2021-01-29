@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
-import { tap } from "rxjs/operators";
+import { tap, skipWhile, take } from "rxjs/operators";
 
 interface SignupCredentials {
   username: string;
@@ -25,7 +25,7 @@ interface SignupResponse {
 @Injectable()
 export class AuthService {
   rootUrl = `https://api.angular-email.com`;
-  signedIn$ = new BehaviorSubject(false);
+  signedIn$ = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {}
 
