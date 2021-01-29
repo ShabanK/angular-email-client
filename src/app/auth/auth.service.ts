@@ -1,64 +1,74 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http"
-import { BehaviorSubject } from "rxjs"
-import { tap } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
+import { tap } from "rxjs/operators";
 
-interface SignupCredentials{
+interface SignupCredentials {
   username: string;
   password: string;
   passwordConfirmation: string;
 }
-
-interface SignedInResponse{
-  authenticated: boolean;
-  username: string
+interface SigninCredentials {
+  username: string;
+  password: string;
 }
 
-interface SignupResponse{
-  username: string
+interface SignedInResponse {
+  authenticated: boolean;
+  username: string;
+}
+
+interface SignupResponse {
+  username: string;
 }
 
 @Injectable()
 export class AuthService {
-
-  rootUrl = `https://api.angular-email.com`
+  rootUrl = `https://api.angular-email.com`;
   signedIn$ = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
-  usernameAvailable(username: string){
-    return this.http.post<any>(`${this.rootUrl}/auth/username`,{
-      username
-    })
+  usernameAvailable(username: string) {
+    return this.http.post<any>(`${this.rootUrl}/auth/username`, {
+      username,
+    });
   }
 
-  signup(credentials: SignupCredentials){
-    console.log("This was fired")
-    return this.http.post<SignupResponse>(`${this.rootUrl}/auth/signup`,
-      credentials,
-    ).pipe(
-      tap(()=>{
-        this.signedIn$.next(true)
-      })
-    )
-  }
-
-  checkAuth(){
-    return this.http.get<SignedInResponse>(`${this.rootUrl}/auth/signedin`, )
+  signup(credentials: SignupCredentials) {
+    console.log("This was fired");
+    return this.http
+      .post<SignupResponse>(`${this.rootUrl}/auth/signup`, credentials)
       .pipe(
-        tap(({authenticated})=>{
-          this.signedIn$.next(authenticated)
+        tap(() => {
+          this.signedIn$.next(true);
         })
-      )
+      );
   }
 
-  signout(){
-    return this.http.post(`${this.rootUrl}/auth/signout`, {})
-            .pipe(
-              tap(()=>{
-                this.signedIn$.next(false);
-              }
-            ))
+  signin(credentials: SigninCredentials) {
+    return this.http.post(`${this.rootUrl}/auth/signin`, credentials).pipe(
+      tap(() => {
+        this.signedIn$.next(true);
+      })
+    );
   }
 
+  checkAuth() {
+    return this.http
+      .get<SignedInResponse>(`${this.rootUrl}/auth/signedin`)
+      .pipe(
+        tap(({ authenticated }) => {
+          this.signedIn$.next(authenticated);
+        })
+      );
+  }
+
+  signout() {
+    return this.http.post(`${this.rootUrl}/auth/signout`, {}).pipe(
+      tap(() => {
+        this.signedIn$.next(false);
+      })
+    );
+  }
 }

@@ -1,24 +1,24 @@
-import {Injectable} from "@angular/core"
+import { Injectable } from "@angular/core";
 import {
-    HttpEvent,
-    HttpInterceptor,
-    HttpHandler,
-    HttpRequest
-} from "@angular/common/http"
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+} from "@angular/common/http";
 
-import { Observable } from "rxjs"
+import { Observable } from "rxjs";
 
 @Injectable()
-export class AuthHttpInterceptor implements HttpInterceptor{
-    intercept(
-        req: HttpRequest<any>, 
-        next: HttpHandler,
-    ):Observable<HttpEvent<any>>{
-        console.log(req)
-        
-        const modifiedReq = req.clone({
-            withCredentials: true
-        })
-        return next.handle(modifiedReq)
-    }
+export class AuthHttpInterceptor implements HttpInterceptor {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    // console.log(req)
+
+    const modifiedReq = req.clone({
+      withCredentials: true,
+    });
+    return next.handle(modifiedReq);
+  }
 }
