@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { EmailService } from "../email.service";
+import { EmailService, Email } from "../email.service";
 import { switchMap } from "rxjs/operators";
 
 @Component({
@@ -9,6 +9,8 @@ import { switchMap } from "rxjs/operators";
   styleUrls: ["./email-show.component.css"],
 })
 export class EmailShowComponent implements OnInit {
+  email: Email;
+
   constructor(
     private route: ActivatedRoute,
     private emailService: EmailService
@@ -22,7 +24,7 @@ export class EmailShowComponent implements OnInit {
         })
       )
       .subscribe((email) => {
-        console.log(email);
+        this.email = email;
       });
   }
 }
