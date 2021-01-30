@@ -12,6 +12,7 @@ import { MatchPassword } from "./auth/validators/match-password";
 import { UniqueUserName } from "./auth/validators/unique-user-name";
 import { AuthHttpInterceptor } from "./auth/auth-http-interceptor";
 import { AuthGuard } from "./auth/auth.guard";
+import { EmailService } from "./inbox/email.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AuthGuard } from "./auth/auth.guard";
     UniqueUserName,
     AuthService,
     AuthGuard,
+    EmailService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
